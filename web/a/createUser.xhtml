@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="createUser">
+       
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="prop-form">
+                
+                <h1 align="center"><h:outputText value="Créer un nouvel utilisateur"/></h1>
+                <div align="center">
+                    <h:panelGrid columns="2" style="width: 50%">
+
+                        <p:outputLabel value="Nom d'utilisateur :" for="uname" />
+                        <p:inputText id="uname" value="#{userMB.uname}" title="Uname" required="true" requiredMessage="The Uname field is required." style="width: 98%" />
+                        <p:outputLabel value="Mot de Passe :" for="upass" />
+                        <p:password id="upass" value="#{userMB.upass}" title="Upass" feedback="true" match="confirmpass" required="true" requiredMessage="The Upass field is required." style="width: 98%" />
+                        <h:outputLabel for="confirmpass" value= "Confirmer le mot de passe" />
+                        <p:password id="confirmpass" value="#{userMB.upass}" label="Confirm Password" required="true" />
+                        <p:outputLabel value="Role :" for="urole" />
+                        <p:selectOneMenu id="urole" value="#{userMB.urole}" >
+                            <f:selectItem itemLabel="choisir le role" itemValue=""/>
+                            <f:selectItem itemLabel="Administrateur" itemValue="Administrateur"/>
+                            <f:selectItem itemLabel="Opérateur" itemValue="Operateur"/>
+                            <f:selectItem itemLabel="Superviseur" itemValue="Superviseur"/>
+                        </p:selectOneMenu>
+                        
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <p:commandButton  id="create" value="Créer" action="#{userMB.creerUser()}" ajax="false" />
+                        <p:commandButton  id="cancel" value="Annuler" action="#{userMB.annulerUser()}" immediate="true" />
+                    </h:panelGrid>
+                </div>
+            </h:form>
+    </ui:define>
+</ui:composition>

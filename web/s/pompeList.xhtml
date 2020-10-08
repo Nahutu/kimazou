@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./templateSuperviseur.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:define name="pompeList">
+        
+    </ui:define>
+
+    <ui:define name="content">
+        <f:view>
+            <h:form>
+                <h1 align="center"><h:outputText value="Liste des Pompes"/></h1>
+                <div align="center">
+                    <p:dataTable value="#{pompeMB.listerPompe()}" var="item" style="width: 90%">
+                        <p:column style="width: 20%" headerText="Pompe ID" sortBy="#{item.pompeID}"
+                                  filterBy="#{item.pompeID}" filterMatchMode="contains">
+                            <h:outputText value="#{item.pompeID}"/> 
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Ilot"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ilot.ilotID} #{item.ilot.station.stationName} #{item.ilot.station.stationAddress}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Modèle"/>
+                            </f:facet>
+                            <h:outputText value="#{item.modele}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="No de Série"/>
+                            </f:facet>
+                            <h:outputText value="#{item.noSerie}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre de Pistolet"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nbrePistolet}" />
+                        </p:column>
+                    </p:dataTable>
+                </div>  
+            </h:form>
+        </f:view>
+    </ui:define>
+</ui:composition>

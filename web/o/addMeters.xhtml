@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="./templateOperateur.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="addMeters">
+    </ui:define>
+    <ui:define name="content">
+        <f:metadata>  
+            <f:viewParam name="pistoletID" value="#{pistoletMB.pistoletID}"  
+                             required="true"/>  
+            <f:viewAction action="#{pistoletMB.chargerPistolet()}"/>  
+        </f:metadata> 
+        <h:form>
+            <h1 align="center"><h:outputText value="Saisir Volume"/></h1>
+            <div align="center">
+                
+                    <h:panelGrid columns="2" style="width: 50%">
+                        <p:outputLabel value="Quantité Prélevée :" for="quantitePrelevee" />
+                        <p:inputText id="quantitePrelevee" value="#{pistoletMB.quantitePrelevee}" title="Quantité Prélevée" required="true" requiredMessage="The volumevendu field is required." />
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <p:commandButton  id="create" value="Ajouter" action="#{pistoletMB.creerMeter()}" ajax="false"/>
+                        <p:linkButton id="cancel" value="Annuler" outcome="#{pistoletMB.annulerVolume()}" />
+                    </h:panelGrid>
+               
+            </div>
+        </h:form>
+        
+    </ui:define>
+</ui:composition>

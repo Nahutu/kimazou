@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./templateOperateur.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                    
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="allMetersByStation">
+      
+    </ui:define>
+    <ui:define name="content">
+        <br></br>
+        <div align="right">
+            <p:commandButton value="Print" type="button" icon="pi pi-print" style="display:block;margin-bottom: 20px; align-content: center">
+                <p:printer target="form" />
+            </p:commandButton>
+        </div>
+        <f:view>
+            <h:form id="form">
+                <h1 align="center"><h:outputText value="METERS PRELEVÉS PAR STATION"/></h1>
+                <div align="center">
+                    <h:panelGrid columns="3" style="width: 80%">
+                        <p:outputLabel value="Sélectionner la station :" for="stationID" />
+                        <p:selectOneMenu id="stationID" value="#{stationMB.statID}"  onchange="submit()" valueChangeListener="#{stationMB.stationIDChanged1}">
+                            <c:forEach items="#{stationMB.listerStation()}" var="stat">
+                                <f:selectItem itemValue="#{stat.stationID}" itemLabel="#{stat.stationName} - #{stat.stationAddress}"/>
+                            </c:forEach>
+                        </p:selectOneMenu>
+                        <p:linkButton outcome="allMetersByStationByDate" value="By Date" style="width: 100%" />
+                    </h:panelGrid>
+                    <h:form id="allPist">
+                        <p:dataTable value="#{stationMB.chargerAllMetersByStation1()}" var="item" style="width: 80%" >
+                            <p:column style="width: 10%">
+                                <f:facet name="header">
+                                    <h:outputText value="Meters ID"/>
+                                </f:facet>
+                                <h:outputText value="#{item.metersID}"/>
+                            </p:column>
+                            <p:column style="width: 20%">
+                                <f:facet name="header">
+                                    <h:outputText value="Quantité Prélevée"/>
+                                </f:facet>
+                                <h:outputText value="#{item.quantitePrelevee} Gallons"/>
+                            </p:column>
+                            <p:column style="width: 15%" headerText="Produits">
+                                <h:outputText value="#{item.produit}"/>
+                            </p:column>
+                            <p:column style="width: 30%">
+                                <f:facet name="header">
+                                    <h:outputText value="Date de Prélèvement"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dateString}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Pompe"/>
+                                </f:facet>     
+                                <h:outputText value="#{item.pistolet.pompe.modele}-#{item.pistolet.pompe.noSerie} - Pistolet # #{item.pistolet.pistoletID} "/>
+                            </p:column>
+                            <p:columnGroup type="footer">
+                                <p:row>
+                                    <p:column colspan="5">
+                                       <f:facet name="footer">
+                                           <h3 style="float: right">
+                                                <h:outputText value="VOLUME TOTAL : #{stationMB.allVolumeTotal()} Gallons"/><br></br>
+                                           </h3>
+                                           
+                                        </f:facet>
+                                    </p:column>
+                                    
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+                    </h:form>
+                </div>
+            </h:form>
+        </f:view>
+    </ui:define>
+    
+</ui:composition>
