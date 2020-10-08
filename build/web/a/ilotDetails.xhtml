@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="ilotDetails">
+    </ui:define>
+    <ui:define name="content">
+        <f:metadata>  
+            <f:viewParam name="ilotID" value="#{ilotMB.ilotID}"  
+                             required="true"/>  
+            <f:viewAction action="#{ilotMB.chargerIlot()}"/>  
+        </f:metadata> 
+        <h:form>
+            <h1 align="center"><h:outputText value="Modifier un ilot"/></h1>
+            <div align="center">
+                <h:panelGrid columns="2" style="width: 50%">
+                    <p:outputLabel value="Ilot ID:" for="ilotID" />
+                    <h:outputLabel id="ilotID" value="#{ilotMB.ilotID}" title="Ilot ID" />
+                    <p:outputLabel value="Station :" for="stationID_Station" />
+                    <p:selectOneMenu id="stationID_Station" value="#{ilotMB.stationID_Station}" style="width: 98%">
+                        <f:selectItem itemLabel="Choisir la station" itemValue=""/>
+                        <c:forEach items="#{stationMB.listerStation()}" var="stat">
+                            <f:selectItem itemValue="#{stat.stationID}" itemLabel="#{stat.stationName} #{stat.stationAddress}"/>
+                        </c:forEach>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <h:dataTable value="#{ilotMB.chargerPompeByIlot()}" var="item" style="width: 50%" border="2">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Pompe ID"/>
+                            </f:facet>
+                            <h:link outcome="#{pompeMB.showDetails(item.pompeID)}" value="#{item.pompeID}"/> 
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Ilot"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ilot.ilotID} #{item.ilot.station.stationName} #{item.ilot.station.stationAddress}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Modèle"/>
+                            </f:facet>
+                            <h:outputText value="#{item.modele}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="No de Série"/>
+                            </f:facet>
+                            <h:outputText value="#{item.noSerie}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre de Pistolet"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nbrePistolet}" />
+                        </p:column>
+                </h:dataTable>
+                <h:panelGrid columns="3">
+                    <p:commandButton id="back" value="Retour" action="#{ilotMB.backToList}" immediate="true"/>  
+                    <p:commandButton id="update" value="Modifier" action="#{ilotMB.modifierIlot()}" ajax="false"/> 
+                    <p:commandButton id="delete" value="Supprimer" action="#{ilotMB.backToList()}" immediate="true" />
+                </h:panelGrid>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

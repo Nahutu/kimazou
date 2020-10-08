@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="stationDetails">
+    </ui:define>
+    <ui:define name="content">
+        <f:metadata>  
+            <f:viewParam name="stationID" value="#{stationMB.stationID}"  
+                             required="true"/>  
+            <f:viewAction action="#{stationMB.chargerStation()}"/>  
+        </f:metadata> 
+        <h:form>
+            <h1 align="center"><h:outputText value="Modifier une station"/></h1>
+            <div align="center">
+                <h:panelGrid columns="2" style="width: 50%">
+                    <p:outputLabel value="Station ID:" for="stationID" />
+                    <h:outputLabel id="stationID" value="#{stationMB.stationID}" title="Station ID" />
+                    <p:outputLabel value="Nom :" for="stationName" />
+                    <h:inputText id="stationName" value="#{stationMB.stationName}" title="StationName" required="true" requiredMessage="The station Name field is required." style="width: 98%" />
+                    <p:outputLabel value="Adresse :" for="stationAddress" />
+                    <h:inputText id="stationAddress" value="#{stationMB.stationAddress}" title="StationAddress" required="true" requiredMessage="The Station Address field is required." style="width: 98%" />
+                    <p:outputLabel value="Téléphone :" for="stationPhone" />
+                    <p:inputMask id="stationPhone" value="#{stationMB.stationPhone}" mask="(999) 9999-9999" style="width: 98%"/>
+                    <p:outputLabel value="Propriétaire :" for="propID_Proprietaire" />
+                    <p:selectOneMenu id="propID_Proprietaire" value="#{stationMB.propID_Proprietaire}" style="width: 98%">
+                        <f:selectItem itemLabel="Choisir le propriétaire" itemValue=""/>
+                             <c:forEach items="#{proprietaireMB.listerProp()}" var="prop">
+                                <f:selectItem itemValue="#{prop.propID}" itemLabel="#{prop.firstname} #{prop.lastname}"/>
+                             </c:forEach>
+                    </p:selectOneMenu>
+                    </h:panelGrid>
+                    
+                <h:panelGrid columns="3">
+                    <p:commandButton id="back" value="Retour" action="#{stationMB.backToList}" immediate="true"/>  
+                    <p:commandButton id="update" value="Modifier" action="#{stationMB.modifierStation()}" ajax="false"/> 
+                    <p:commandButton id="delete" value="Supprimer" action="#{stationMB.backToList()}" immediate="true" />
+                </h:panelGrid>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

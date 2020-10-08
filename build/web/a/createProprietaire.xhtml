@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="createProprietaire">
+       
+    </ui:define>
+    <ui:define name="content">
+        <f:view>
+            <h:form>
+                <h1 align="center"><h:outputText value="Créer un nouveau propriétaire"/></h1>
+                <div align="center">
+                    <h:panelGrid columns="2" style="width: 50%">
+                        <p:outputLabel value="Prénom :" for="firstname" />
+                        <p:inputText id="firstname" value="#{proprietaireMB.firstname}" title="Firstname" required="true" requiredMessage="The Firstname field is required." style="width: 98%" />
+                        <p:outputLabel value="Nom :" for="lastname" />
+                        <p:inputText id="lastname" value="#{proprietaireMB.lastname}" title="Lastname" required="true" requiredMessage="The Lastname field is required." style="width: 98%" />
+                        <p:outputLabel value="NIF :" for="nif" />
+                        <p:inputMask id="nif" value="#{proprietaireMB.nif}" mask="999-999-999-9" style="width: 98%"/>
+                        <p:outputLabel value="Adresse :" for="address" />
+                        <p:inputText id="address" value="#{proprietaireMB.address}" title="Address" required="true" requiredMessage="The Address field is required." style="width: 98%" />
+                        <p:outputLabel value="Téléphone :" for="telephone" />
+                        <p:inputMask id="telephone" value="#{proprietaireMB.telephone}" mask="(999) 9999-9999" style="width: 98%"/>
+                        <p:outputLabel value="Email :" for="email" />
+                        <p:inputText id="email" value="#{proprietaireMB.email}" title="Email" required="true" requiredMessage="The Email field is required." validatorMessage="Invalid email format" style="width: 98%" >
+                             <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                        </p:inputText>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <p:commandButton  id="create" value="Créer" action="#{proprietaireMB.creerProp()}" ajax="false" />
+                        <p:commandButton  id="cancel" value="Annuler" action="#{proprietaireMB.annulerProp()}" immediate="true" />
+                    </h:panelGrid>
+                </div>
+            </h:form>
+        </f:view>
+        
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"  
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">  
+  
+    <h:head rendered="#{userMB.superRenderedValue}">  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>   
+        <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/images/kimazou1.ico"/>
+        <script type="text/javascript" library="js" name="fr.js"></script>
+        <script>
+            var check = function() {
+            if (document.getElementById('upass').value ===
+              document.getElementById('confirmpass').value) {
+              document.getElementById('message').style.color = 'green';
+              document.getElementById('message').innerHTML = 'matching';
+            } else {
+              document.getElementById('message').style.color = 'red';
+              document.getElementById('message').innerHTML = 'not matching';
+            }
+          }
+        </script>
+        <title>KIMAZOU</title>  
+    </h:head>  
+  
+    <h:body rendered="#{userMB.superRenderedValue}">  
+        <div id="top" class="top">  
+            <h1 align="center"><h:link outcome="super.xhtml" value="KIMAZOU - GESTION STOCK" /></h1>
+        </div>  
+        <div class="ui-fluid">  
+            <div id="left">  
+                <h:form>
+                        <p:megaMenu style="margin-top:20px"> 
+                            <p:submenu label="Utilisateur" icon="pi pi-check">
+                               <p:column>
+                                   <p:submenu>
+                                       <p:menuitem value="Change Password" url="changePassword.xhtml" />
+                                       <p:menuitem value="log Out" action="#{userMB.logout()}"/>
+                                   </p:submenu>
+                               </p:column>
+                           </p:submenu>
+                           <p:submenu label="Station" icon="pi pi-check">
+                               <p:column>
+                                   <p:submenu>
+                                       <p:menuitem value="Lister Station" url="stationList.xhtml" />
+                                       <p:menuitem value="Lister Propriétaire" url="proprietaireList.xhtml" />
+                                       <p:menuitem value="Lister Pompe" url="pompeList.xhtml" />
+                                       <p:menuitem value="Lister Pistolet" url="pistoletList.xhtml" /> 
+                                       <p:menuitem value="Meters par Station" url="allMetersByStation.xhtml" />
+                                       <p:menuitem value="Etalonnage Meters" url="etalonnageMeters.xhtml" />
+                                   </p:submenu>
+                               </p:column>
+                           </p:submenu>
+                        </p:megaMenu> 
+                 </h:form>
+            </div> 
+        </div>
+        <div id="content" class="left_content">
+            <ui:insert name="content">Content</ui:insert>
+	</div>
+    </h:body>
+</html> 
