@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"  
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">  
+  
+    <h:head rendered="#{userMB.adminRenderedValue}">  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>   
+        <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/images/kimazou1.ico"/>
+        <script type="text/javascript" library="js" name="fr.js"></script>
+        <title>KIMAZOU</title>  
+    </h:head>  
+  
+    <h:body rendered="#{userMB.adminRenderedValue}">  
+        <div id="top" class="top">  
+            <h1 align="center"><h:link outcome="index.xhtml" value="KIMAZOU - GESTION DE VOLUME" /></h1>
+             
+            
+        </div>  
+        <div class="ui-fluid">  
+            <div id="left">  
+                <h:form>
+                        <p:megaMenu style="margin-top:20px"> 
+                            <p:submenu label="Utilisateur" icon="pi pi-check">
+                               <p:column>
+                                   <p:submenu>
+                                       <p:menuitem value="Lister" url="userList.xhtml" />
+                                       <p:menuitem value="Créer" url="createUser.xhtml" />
+                                       <p:menuitem value="log Out" action="#{userMB.logout()}"/>
+                                   </p:submenu>
+                               </p:column>
+                           </p:submenu>
+                           <p:submenu label="Propriétaire" icon="pi pi-check">
+                               <p:column>
+                                   <p:submenu>
+                                       <p:menuitem value="Lister" url="proprietaireList.xhtml" />
+                                       <p:menuitem value="Créer" url="createProprietaire.xhtml" />
+                                       
+                                   </p:submenu>
+                               </p:column>
+                           </p:submenu>
+                           <p:submenu label="Station" icon="pi pi-check">
+                               <p:column>
+                                   <p:submenu>
+                                       <p:menuitem value="Lister" url="stationList.xhtml" />
+                                       <p:menuitem value="Créer" url="createStation.xhtml" />
+                                       <p:menuitem value="Meters par Station" url="allMetersByStationByDate.xhtml" />
+                                       <p:menuitem value="Etalonnage Meters" url="etalonnageMeters.xhtml" />
+                                   </p:submenu>
+                               </p:column>
+                           </p:submenu>
+                            <p:submenu label="Ilot" icon="pi pi-check">
+                               <p:column>
+                                   <p:submenu>
+                                       <p:menuitem value="Lister" url="ilotList.xhtml" />
+                                       <p:menuitem value="Créer" url="createIlot.xhtml" />
+                                   </p:submenu>
+                               </p:column>
+                           </p:submenu>
+                           <p:submenu label="Pompe" icon="pi pi-check">
+                               <p:column>
+                                   <p:submenu>
+                                       <p:menuitem value="Lister" url="pompeList.xhtml" />
+                                       <p:menuitem value="Créer" url="createPompe.xhtml" />
+                                   </p:submenu>
+                               </p:column>
+                           </p:submenu>
+                           <p:submenu label="Pistolet" icon="pi pi-check">
+                               <p:column>
+                                   <p:submenu>
+                                       <p:menuitem value="Lister" url="pistoletList.xhtml" />
+                                       <p:menuitem value="Créer" url="createPistolet.xhtml" />
+                                       
+                                   </p:submenu>
+                               </p:column>
+                           </p:submenu>
+                        </p:megaMenu>
+                        
+                 </h:form>
+               
+            </div>
+            
+        </div>
+	
+        <div id="content" class="left_content">
+	
+            <ui:insert name="content">Content</ui:insert>
+				
+		
+	</div>
+    </h:body>
+</html> 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="proprietaireDetails">
+    </ui:define>
+    <ui:define name="content">
+            <f:metadata>  
+                <f:viewParam name="propID" value="#{proprietaireMB.propID}"  
+                             required="true"/>  
+                <f:viewAction action="#{proprietaireMB.chargerProp()}"/>  
+            </f:metadata> 
+            <h:form>
+                <h1 align="center"><h:outputText value="Modifier un propriétaire"/></h1>
+                <div align="center">
+                    <h:panelGrid columns="2" style="width: 50%">
+                        <p:outputLabel value="Propriétaire ID :" for="propID" />
+                        <h:outputLabel id="propID" value="#{proprietaireMB.propID}" title="PropID" />
+                        <p:outputLabel value="Prénom :" for="firstname" />
+                        <h:inputText id="firstname" value="#{proprietaireMB.firstname}" title="Firstname" required="true" requiredMessage="The Firstname field is required." style="width: 98%" />
+                        <p:outputLabel value="Nom :" for="lastname" />
+                        <h:inputText id="lastname" value="#{proprietaireMB.lastname}" title="Lastname" required="true" requiredMessage="The Lastname field is required." style="width: 98%" />
+                        <p:outputLabel value="NIF :" for="nif" />
+                        <p:inputMask id="nif" value="#{proprietaireMB.nif}" mask="999-999-999-9" style="width: 98%"/>
+                        <p:outputLabel value="Adresse :" for="address" />
+                        <h:inputText id="address" value="#{proprietaireMB.address}" title="Address" required="true" requiredMessage="The Address field is required." style="width: 98%" />
+                        <p:outputLabel value="Téléphone :" for="telephone" />
+                        <p:inputMask id="telephone" value="#{proprietaireMB.telephone}" mask="(999) 9999-9999" style="width: 98%"/>
+                        <p:outputLabel value="Email :" for="email" />
+                        <p:inputText id="email" value="#{proprietaireMB.email}" title="Email" required="true" requiredMessage="The Email field is required." validatorMessage="Invalid email format" style="width: 98%" >
+                             <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                        </p:inputText>
+                    </h:panelGrid>
+                    <h:panelGrid columns="3">
+                        <p:commandButton id="back" value="Retour" action="#{proprietaireMB.backToList}" immediate="true"/>  
+                        <p:commandButton id="update" value="Modifier" action="#{proprietaireMB.modifierProp()}" ajax="false"/> 
+                        <p:commandButton id="delete" value="Supprimer" action="#{proprietaireMB.backToList()}" immediate="true" />
+                    </h:panelGrid>
+                    
+                </div>
+            </h:form>
+    </ui:define>
+</ui:composition>

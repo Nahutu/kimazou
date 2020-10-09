@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./templateOperateur.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:define name="stationList">
+        
+    </ui:define>
+
+    <ui:define name="content">
+        <f:view>
+            <h:form>
+                <h1 align="center"><h:outputText value="Liste de Stations"/></h1>
+                <div align="center">
+                    <p:dataTable value="#{stationMB.listerStation()}" var="item" style="width: 90%">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Station ID"/>
+                            </f:facet>
+                            <h:outputText value="#{item.stationID}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nom"/>
+                            </f:facet>
+                            <h:outputText value="#{item.stationName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Adresse"/>
+                            </f:facet>
+                            <h:outputText value="#{item.stationAddress}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Téléphone"/>
+                            </f:facet>
+                            <h:outputText value="#{item.stationPhone}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Propriétaire"/>
+                            </f:facet>
+                            <h:outputText value="#{item.proprietaire.firstname} #{item.proprietaire.lastname}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Meters"/>
+                            </f:facet>
+                            <h:link outcome="#{stationMB.showMeters(item.stationID)}" value="Ajouter Meters"/> 
+                        </p:column>
+                    </p:dataTable>
+                </div>  
+            </h:form>
+        </f:view>
+    </ui:define>
+</ui:composition>

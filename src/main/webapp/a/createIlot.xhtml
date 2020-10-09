@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="createIlot">
+      
+    </ui:define>
+    <ui:define name="content">
+        <f:view>
+            <h:form>
+                <h1 align="center"><h:outputText value="Créer un nouvel ilot"/></h1>
+                <div align="center">
+                    <h:panelGrid columns="2" style="width: 50%">
+                        <p:outputLabel value="Station :" for="stationID_Station" />
+                        <p:selectOneMenu id="stationID_Station" value="#{ilotMB.stationID_Station}" style="width: 98%">
+                            <f:selectItem itemLabel="Choisir la station" itemValue=""/>
+                            <c:forEach items="#{stationMB.listerStation()}" var="stat">
+                                <f:selectItem itemValue="#{stat.stationID}" itemLabel="#{stat.stationName} #{stat.stationAddress}"/>
+                            </c:forEach>
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    <h:panelGrid columns="1">
+                        <p:commandButton  id="create" value="Créer" action="#{ilotMB.creerIlot()}" ajax="false" />
+                    </h:panelGrid>
+                </div>
+            </h:form>
+        </f:view>
+        
+    </ui:define>
+    
+</ui:composition>

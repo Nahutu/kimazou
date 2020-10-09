@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="userDetails">
+    </ui:define>
+    <ui:define name="content">
+        <f:metadata>  
+            <f:viewParam name="userID" value="#{userMB.userID}"  
+                             required="true"/>  
+            <f:viewAction action="#{userMB.chargerUser()}"/>  
+        </f:metadata> 
+        <h:form>
+            <h1 align="center"><h:outputText value="Modifier un utilisateur"/></h1>
+            <div align="center">
+                <h:panelGrid columns="2" style="width: 50%">
+                    <p:outputLabel value="Utilsateur ID:" for="userID" />
+                    <p:outputLabel id="userID" value="#{userMB.userID}" title="User ID" />
+                    <p:outputLabel value="Nom d'utilisateur :" for="uname" />
+                    <p:inputText id="uname" value="#{userMB.uname}" title="uname" required="true" requiredMessage="The uname  field is required." style="width: 57%"/>            
+                    <p:outputLabel value="Mot de Passe :" for="upass" />
+                    <p:password id="upass" value="#{userMB.upass}" title="upass" required="true" requiredMessage="The uname  field is required." style="width: 57%"/>            
+                    <p:outputLabel value="Role de l'utilisateur :" for="urole" />
+                    <p:selectOneMenu id="urole" value="#{userMB.urole}" style="width: 60%" >
+                        <f:selectItem itemLabel="choisir le role de l'utilisateur" itemValue=""/>
+                        <f:selectItem itemLabel="Administateur" itemValue="Administrateur"/>
+                        <f:selectItem itemLabel="Opérateur" itemValue="Operateur"/>
+                        <f:selectItem itemLabel="Superviseur" itemValue="Superviseur"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <h:panelGrid columns="3">
+                    <p:commandButton id="back" value="Retour" action="#{userMB.backToList()}" immediate="true"/>  
+                    <p:commandButton id="update" value="Modifier" action="#{userMB.modifierUser()}" ajax="false"/> 
+                    <p:commandButton id="delete" value="Supprimer" action="#{userMB.backToList()}" immediate="true" />
+                </h:panelGrid>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
